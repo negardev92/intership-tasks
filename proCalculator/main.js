@@ -1,67 +1,72 @@
+const inputNumber1 = document.getElementById('num1');
+const inputNumber2 = document.getElementById('num2');
+const addop = document.getElementById('add');
+const minop = document.getElementById('min');
+const multiplyop = document.getElementById('Multiply');
+const divideop = document.getElementById('Divide');
+const btnequal = document.getElementById('equal');
 
+let operation; 
 
-class Parent {
-    constructor(a, b) {
-        this.a = a;
-        this.b = b;
-    }
-}
+addop.addEventListener('click', () => operation = 'add');
+minop.addEventListener('click', () => operation = 'sub');
+multiplyop.addEventListener('click', () => operation = 'mult');
+divideop.addEventListener('click', () => operation = 'divi');
 
+btnequal.addEventListener('click', function(e) {
+    e.preventDefault();
 
-class Add extends Parent {
-    calculate() {
-        return this.a + this.b;
-    }
-}
-
-class Subtract extends Parent {
-    calculate() {
-        return this.a - this.b;
-    }
-}
-
-class Multiply extends Parent {
-    calculate() {
-        return this.a * this.b;
-    }
-}
-
-class Divide extends Parent {
-    calculate() {
-        if (this.b === 0) {
-            return "خطا: تقسیم بر صفر مجاز نیست.";
+    class Parent {
+        constructor(inputNumber1, inputNumber2) {
+            this.a = parseFloat(inputNumber1.value);
+            this.b = parseFloat(inputNumber2.value);
         }
-        return this.a / this.b;
-    }
-}
-
-class Builder {
-    constructor(num1, num2) {
-        this.num1 = num1;
-        this.num2 = num2;
     }
 
-    build() {
-        return { a: this.num1,
-                 b: this.num2 
-            };
+    class Add extends Parent {
+        calculate() {
+            return this.a + this.b;
+        }
     }
-}
 
-function calculate(operation) {
-    const num1 = parseFloat(document.getElementById('num1').value);
-    const num2 = parseFloat(document.getElementById('num2').value)
-    const builder = new Builder(num1, num2);
-    const inputs = builder.build();
+    class Subtract extends Parent {
+        calculate() {
+            return this.a - this.b;
+        }
+    }
 
+    class Multiply extends Parent {
+        calculate() {
+            return this.a * this.b;
+        }
+    }
+
+    class Divide extends Parent {
+        calculate() {
+            if (this.b === 0) {
+                return "خطا: تقسیم بر صفر مجاز نیست.";
+            }
+            return this.a / this.b;
+        }
+    }
+
+    let result; 
     
-    const operations = {
-        add: () => new Add(inputs.a, inputs.b).calculate(),
-        sub: () => new Subtract(inputs.a, inputs.b).calculate(),
-        mult: () => new Multiply(inputs.a, inputs.b).calculate(),
-        divi: () => new Divide(inputs.a, inputs.b).calculate()
-    };
-    const result = (operations[operation])
+    if (operation === 'add') {
+        const addition = new Add(inputNumber1, inputNumber2);
+        result = addition.calculate();
+    } else if (operation === 'sub') {
+        const subtraction = new Subtract(inputNumber1, inputNumber2);
+        result = subtraction.calculate();
+    } else if (operation === 'mult') {
+        const multiplication = new Multiply(inputNumber1, inputNumber2);
+        result = multiplication.calculate();
+    } else if (operation === 'divi') {
+        const division = new Divide(inputNumber1, inputNumber2);
+        result = division.calculate();
+    } else {
+        result = "عملی انتخاب نشده است.";
+    }
+   
     document.getElementById('result').innerText = `نتیجه: ${result}`;
-    console.log(result);
-}
+});
