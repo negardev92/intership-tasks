@@ -1,60 +1,90 @@
-body {font-family: Arial, Helvetica, sans-serif;
-
-}
-form {border: 2px solid #e0d6d6;
-width:fit-content;
-margin: auto;
-padding: 15px;
-border-radius: 15px;
-display: flex;
-  justify-content: center; 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  direction: rtl;
+  height: 100vh;
+  justify-content: center;
   align-items: center;
- 
+  margin: 0;
+  display: flex
+
 }
 
-input[type=text], input[type=password] {
-  width:100%;
-  padding: 12px 20px;
+form {
+  border: 2px solid #e0d6d6;
+  margin: 0 auto;
+  width: 100%;
+  padding: 15px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+  flex-direction: column;
+  
+
+}
+
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 15px 35px;
   margin: 15px 0;
   display: block;
   border: 1px solid #ccc;
   box-sizing: border-box;
   border-radius: 15px;
- 
-  
+  outline: none;
+
+
 }
 
 button {
   background-color: #04AA6D;
   color: white;
   padding: 10px 5px;
-  margin: 7px 0;
+  margin: auto; 
+  display: block; 
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: calc(50% - 26px);
   border-radius: 6px;
-  margin: 5px;
-  
- 
-  
- 
+
 }
+
 
 button:hover {
   opacity: 0.8;
 }
 
 .container {
-  padding: 16px;
-  
-  
-}
-
-h2{
-    text-align: center;
+  padding: 28px;
+   max-width: 450px;
 
 }
-.btns{
-    display: flex;
 
+h2 {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  
+
+}
+
+#forgotPassword {
+  text-decoration: none;
+  font-size: medium;
+  color: black;
+  display: inline-block;
+}
+.psw{
+ 
 }
