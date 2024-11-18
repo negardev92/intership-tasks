@@ -1,13 +1,15 @@
+
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api-call.service';
 import { ActivatedRoute } from '@angular/router';
+import { ApiGetUserService } from '../api-get-user.service'; 
+
 
 @Component({
-  selector: 'app-user-cart',
-  templateUrl: './user-cart.component.html',
-  styleUrls: ['./user-cart.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class UserCartComponent implements OnInit {
+export class UserComponent implements OnInit {
   users: any[] = [];
   user: any;
   posts: any[] = [];
@@ -16,19 +18,19 @@ export class UserCartComponent implements OnInit {
   currentView: string = 'posts';
   userIdSlected:any = [];
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) { }
+  constructor(private route: ActivatedRoute, private apiService:  ApiGetUserService ) { }
 
 
   ngOnInit(): void {
     this.apiService.getDataFromUsers().subscribe(data => {
         this.users = data;
 
-        const userId = +this.route.snapshot.params['id'];
+        this.route.params.subscribe((param)=>{
+          const userId = +param['id'];
+          console.log(userId)
         this.getUser(userId);
-    });
-
- 
-  
+        });
+      })
 }
 
 getUser(userId: number) {

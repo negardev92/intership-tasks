@@ -1,0 +1,11 @@
+<nav *ngIf="isLoggedIn" class="navbar navbar-light bg-light">
+  
+    <div class="d-flex justify-content-between w-100">
+      <span class="navbar-text">
+        {{ username }}
+      </span>
+      <button class="btn btn-danger" (click)="logout()">خروج</button>
+    </div>
+ 
+</nav>
+
