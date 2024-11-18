@@ -1,11 +1,16 @@
-<nav *ngIf="isLoggedIn" class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-light">
   
-    <div class="d-flex justify-content-between w-100">
+    <div  *ngIf="isLoggedIn"  class="d-flex justify-content-between w-100">
       <span class="navbar-text">
         {{ username }}
       </span>
-      <button class="btn btn-danger" (click)="logout()">خروج</button>
+      <button class="btn btn-danger" (click)="btnlogout()">خروج</button>
     </div>
- 
+    <!-- <div class="d-flex justify-content-center w-100">
+      <ng-template #logouts>
+        <button class="btn btn-danger " (click)="btnlogin()">ورود</button>
+        <button class="btn btn-danger " (click)="btnrejster()">ثبت نام </button>
+      </ng-template>
+    </div> -->
 </nav>
 

@@ -14,9 +14,8 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // اشتراک در وضعیت ورود کاربر
     this.authService.isLoggedIn().subscribe(loggedIn => {
-      this.isLoggedIn = loggedIn; // بروزرسانی وضعیت ورود
+      this.isLoggedIn = loggedIn;  
     });
   }
 }

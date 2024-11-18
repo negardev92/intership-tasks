@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.authService.isLoggedIn().subscribe(loggedIn => {
-      this.isLoggedIn = loggedIn; // بروزرسانی وضعیت ورود
+      this.isLoggedIn = loggedIn; 
       const user = this.authService.getUser();
       if (this.isLoggedIn) {
         this.username = user.username; 
@@ -32,14 +32,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  logout() {
+  btnlogout() {
     this.authService.logout();
     this.router.navigate(['/login']); 
   }
+  
+
+
 
   ngOnDestroy(): void {
     if (this.subscription) {
-      this.subscription.unsubscribe(); // لغو اشتراک برای جلوگیری از نشت حافظه
+      this.subscription.unsubscribe();
     }
   }
 }

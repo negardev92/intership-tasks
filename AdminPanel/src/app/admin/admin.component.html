@@ -1,14 +1,20 @@
 
-<app-navbar></app-navbar>
-
 <div *ngIf="isAdmin; else nonAdminContent">
   <div class="container">
     <div class="row">
-      <div class="col-3">
+      <div class="col-4">
+        <input type="text" placeholder="جستجو بر اساس نام" #searchInput />
+        <button
+          class=" btn btn-primary"
+          type="button"
+          (click)="filterUsers(searchInput.value)"
+        >
+          Search
+        </button>
         <ul class="list-group">
           <h5>User List</h5>
-          <li class="list-group-item" *ngFor="let user of users">
-            <a [routerLink]="['/admin/user', user.id]">{{ user.name }}</a> 
+          <li class="list-group-item" *ngFor="let user of filteredUsers"> <!-- استفاده از filteredUsers -->
+            <a [routerLink]="['/admin/user', user.id]">{{ user.name }}</a>
           </li>
         </ul>
       </div>
