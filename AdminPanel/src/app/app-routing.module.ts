@@ -9,8 +9,8 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [ adminGuard] },
-  { path: 'admin/user/:id', component:UserComponent},
+  { path: 'admin', component: AdminComponent, canActivate: [ adminGuard],children:[{ path: 'user/:id', component:UserComponent},] },
+  
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 

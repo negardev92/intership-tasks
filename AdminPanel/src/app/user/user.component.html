@@ -1,14 +1,14 @@
 <div class="container">
-  <div class="row justify-content-center align-items-start" style="margin-top: 20px">
-    <div class="col-9">
+  <div  style="margin-top: 20px">
+    <div class="col-12">
       <div class="text-center" *ngIf="user">
         <button (click)="fetchPosts(user.id,'posts')" class="btn btn-success mx-2">Posts</button>
         <button (click)="fetchAlbums(user.id,'albums')" class="btn btn-success mx-2">Albums</button>
         <button (click)="fetchTasks(user.id,'tasks')" class="btn btn-success mx-2">Tasks</button>
       </div>
 
-      <div class="row">
-        <div class="card text-white bg-dark mb-3 m-3 col-4 mx-auto" style="max-width: 30%">
+      <div class="col-12">
+        <div class="card text-white bg-dark mb-3 m-3 col-8 mx-auto" style="max-width:90%">
           <div class="card-body">
             <h5 class="card-title">User Info</h5>
             <p class="card-text">NAME : {{ user?.name }}</p>
@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-
+      <div class="contetnt" style="width: 470px;">
       <div *ngIf="currentView === 'posts' && posts.length > 0">
         <h4>Posts</h4>
         <ul class="list-group">
@@ -37,6 +37,7 @@
           <li *ngFor="let task of tasks" class="list-group-item">{{ task.title }}</li>
         </ul>
       </div>
+    </div>
     </div>
   </div>
 </div>

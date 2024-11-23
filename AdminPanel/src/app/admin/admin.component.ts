@@ -9,42 +9,34 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
   users: any[] = [];
   isAdmin: boolean = false;
   userId: any;
+  searchTerm: string | null = null;
   filteredUsers: any[] = [];
- foundUser:any 
- searchTerm =" "
- 
-
   constructor(private authService: AuthService, private route: ActivatedRoute, private apiService: ApiGetUserService,) { }
 
-  ngOnInit(): void {
-    this.isAdmin = this.authService.getUser().role === 'admin';
-    this.apiService.getDataFromUsers().subscribe(data => {
-      this.users = data;
-      this.filteredUsers = this.users;
+  
+ngOnInit(): void {
+  this.isAdmin = this.authService.getUser().role === 'admin';
+  this.apiService.getDataFromUsers().subscribe(data => {
+    this.users = data;
+    
+    this.route.queryParams.subscribe(params => {
+      this.searchTerm = params['search'] || null;
+     
+      if (this.searchTerm) {
+        this.users = this.users.filter(user =>
+          user.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+          
+        );
+      }else{
+        this.users = data;
+      }
     });
-  }
-  filterUsers(searchTerm: string): void {
-    if (!searchTerm) {
-      this.filteredUsers = this.users; 
-      return;
-    }
-const foundUser = this.users.find(user =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-     if(foundUser){
-      this.filteredUsers = foundUser ? [foundUser] : [];
-      
-     }else{
-      this.filteredUsers = this.users; 
-      
-      alert("کابر وجود ندارد ")
-     }
-    this.searchTerm= " ";
-  }
+  });
+}
+  
   
 }
 
