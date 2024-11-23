@@ -1,43 +1,75 @@
-<div class="container">
-  <div  style="margin-top: 20px">
-    <div class="col-12">
-      <div class="text-center" *ngIf="user">
-        <button (click)="fetchPosts(user.id,'posts')" class="btn btn-success mx-2">Posts</button>
-        <button (click)="fetchAlbums(user.id,'albums')" class="btn btn-success mx-2">Albums</button>
-        <button (click)="fetchTasks(user.id,'tasks')" class="btn btn-success mx-2">Tasks</button>
-      </div>
-
+<div class="container-fluid">
+  <div style="margin-top: 20px">
+    <div class="row">
       <div class="col-12">
-        <div class="card text-white bg-dark mb-3 m-3 col-8 mx-auto" style="max-width:90%">
-          <div class="card-body">
-            <h5 class="card-title">User Info</h5>
-            <p class="card-text">NAME : {{ user?.name }}</p>
-            <p class="card-text">EMAIL : {{ user?.email }}</p>
+        <div class="text-center" *ngIf="user">
+          <button
+            (click)="fetchPosts(user.id, 'posts')"
+            class="btn btn-light mx-2 active"
+          >
+            Posts
+          </button>
+          <button
+            (click)="fetchAlbums(user.id, 'albums')"
+            class="btn btn-light mx-2"
+          >
+            Albums
+          </button>
+          <button
+            (click)="fetchTasks(user.id, 'tasks')"
+            class="btn btn-light mx-2"
+          >
+            Tasks
+          </button>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center align-items-center">
+          <div
+            class="card text-center bg-light mb-3 m-3"
+            style="max-width: 80%"
+          >
+            <div class="card-body">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp"
+                class="rounded-3"
+                style="width: 150px"
+                alt="Avatar"
+              />
+              <hr>
+              <p class="card-text">NAME : {{ user?.name }}</p>
+              <p class="card-text">EMAIL : {{ user?.email }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-4" style="width: 1000px">
+          <div *ngIf="currentView === 'posts' && posts.length > 0">
+            <h4>Posts</h4>
+            <ul class="list-group">
+              <li *ngFor="let post of posts" class="list-group-item">
+                {{ post.title }}
+              </li>
+            </ul>
+          </div>
+
+          <div *ngIf="currentView === 'albums' && albums.length > 0">
+            <h4>Albums</h4>
+            <ul class="list-group">
+              <li *ngFor="let album of albums" class="list-group-item">
+                {{ album.title }}
+              </li>
+            </ul>
+          </div>
+
+          <div *ngIf="currentView === 'tasks' && tasks.length > 0">
+            <h4>Tasks</h4>
+            <ul class="list-group">
+              <li *ngFor="let task of tasks" class="list-group-item">
+                {{ task.title }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="contetnt" style="width: 470px;">
-      <div *ngIf="currentView === 'posts' && posts.length > 0">
-        <h4>Posts</h4>
-        <ul class="list-group">
-          <li *ngFor="let post of posts" class="list-group-item">{{ post.title }}</li>
-        </ul>
-      </div>
-
-      <div *ngIf="currentView === 'albums' && albums.length > 0">
-        <h4>Albums</h4>
-        <ul class="list-group">
-          <li *ngFor="let album of albums" class="list-group-item">{{ album.title }}</li>
-        </ul>
-      </div>
-
-      <div *ngIf="currentView === 'tasks' && tasks.length > 0">
-        <h4>Tasks</h4>
-        <ul class="list-group">
-          <li *ngFor="let task of tasks" class="list-group-item">{{ task.title }}</li>
-        </ul>
-      </div>
-    </div>
     </div>
   </div>
 </div>

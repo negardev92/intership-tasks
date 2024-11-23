@@ -19,9 +19,12 @@
             <option value="user">User</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-secondary w-50 btn-login mt-4">Register</button>
-        <a class="btn btn-secondary w-50 btn-login mt-4" routerLink="/login">login </a>
+        <div class="d-flex justify-content-center align-items-center">
+          <button type="submit" class="btn btn-secondary btn-login mt-4 m-2 w-50">Register</button>
+        <a class="btn btn-secondary btn-login mt-4 m-2 w-50"  routerLink="/login">login </a>
         <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+        </div>
+        
       </form>
     </div>
   </div>
@@ -39,5 +42,10 @@
 
   label {
     margin-top: 20px; 
+  }
+  .btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem; 
   }
 </style>

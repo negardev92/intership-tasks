@@ -1,7 +1,7 @@
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiGetUserService } from '../api-get-user.service';
 
@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   filteredUsers: any[] = [];
   searchTerm: string = "";
 
-  constructor(private authService: AuthService, private router: Router, private apiService: ApiGetUserService) {}
+  constructor(private authService: AuthService, private router: Router, private apiService: ApiGetUserService,private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.subscription = this.authService.isLoggedIn().subscribe(loggedIn => {
@@ -43,25 +43,35 @@ export class NavbarComponent implements OnInit, OnDestroy {
   filterUsers(searchTerm: string): void {
     if (!searchTerm) {
       this.filteredUsers = this.users; 
-      this.router.navigate([], { queryParams: { search: null } }); 
+     const SendQeuryPramsNullInput= this.router.navigate([], { queryParams: { search: null } });
+     //when input emty 
+     if(SendQeuryPramsNullInput){
+      this.filteredUsers = this.users; 
+     }
       return;
     }
-
-    this.router.navigate([], { queryParams: { search: searchTerm } }); 
-  
+    //set
+    this.router.navigate([], { queryParams: { search: searchTerm } });
+    //read
+    this.route.queryParams.subscribe(params => {
+      this.searchTerm = params['search'] || null;
+  });
+   //find
     const foundUser = this.users.find(user =>
       user.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+   
 
     if (foundUser) {
       this.filteredUsers = [foundUser];
     } else {
-      this.filteredUsers = this.users;
       alert("کاربر وجود ندارد");
+      this.router.navigate([], { queryParams: { search: null } }); 
     }
     this.searchTerm = ""; 
+  
   }
-
+  
   btnlogout() {
     this.authService.logout();
     this.router.navigate(['/login']); 

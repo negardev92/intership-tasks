@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="d-flex justify-content-center align-items-center vh-100 bg-image">
-    <div class="card shadow-lg border-0 rounded">
+  <div class="d-flex justify-content-center align-items-center vh-100 ">
+    <div class="card shadow-lg rounded">
       <h4 class="text-center login-heading mt-4">Login</h4>
       <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="p-4">
         <div class="form-group">
@@ -27,8 +27,8 @@
         </div>
 
         <div class="d-flex">
-          <button type="submit" class="btn btn-secondary w-50 btn-login mt-4">login</button>
-          <a class="btn btn-secondary w-50 btn-login mt-4" routerLink="/register">Register </a>
+          <button type="submit" class="btn btn-secondary w-50 btn-login mt-4 m-2">login</button>
+          <a class="btn btn-secondary w-50 btn-login mt-4 m-2" routerLink="/register">Register </a>
         </div>
         <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
       </form>
@@ -44,9 +44,6 @@
   }
 
   .form-control {
-    border: none;
-    border-bottom: 2px solid #0f5aa5;
-    transition: border-color 0.3s;
     padding: 5px;
     margin-top: 5px;
   }
