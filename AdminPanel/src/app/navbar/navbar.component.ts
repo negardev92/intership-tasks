@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   filteredUsers: any[] = [];
   searchTerm: string = "";
 
-  constructor(private authService: AuthService, private router: Router, private apiService: ApiGetUserService,private route: ActivatedRoute) {}
+  constructor(private authService: AuthService, private router: Router, private apiService: ApiGetUserService) {}
 
   ngOnInit(): void {
     this.subscription = this.authService.isLoggedIn().subscribe(loggedIn => {
@@ -40,38 +40,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  filterUsers(searchTerm: string): void {
-    if (!searchTerm) {
-      this.filteredUsers = this.users; 
-     const SendQeuryPramsNullInput= this.router.navigate([], { queryParams: { search: null } });
-     //when input emty 
-     if(SendQeuryPramsNullInput){
-      this.filteredUsers = this.users; 
-     }
-      return;
-    }
-    //set
-    this.router.navigate([], { queryParams: { search: searchTerm } });
-    //read
-    this.route.queryParams.subscribe(params => {
-      this.searchTerm = params['search'] || null;
-  });
-   //find
-    const foundUser = this.users.find(user =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-   
-
-    if (foundUser) {
-      this.filteredUsers = [foundUser];
-    } else {
-      alert("کاربر وجود ندارد");
-      this.router.navigate([], { queryParams: { search: null } }); 
-    }
-    this.searchTerm = ""; 
-  
-  }
-  
+ 
   btnlogout() {
     this.authService.logout();
     this.router.navigate(['/login']); 
