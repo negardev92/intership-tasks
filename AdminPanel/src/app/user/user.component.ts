@@ -1,7 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiGetUserService } from '../api-get-user.service'; 
+import { UserService } from '../satatemangementlocal.service';
 
 
 @Component({
@@ -18,18 +19,18 @@ export class UserComponent implements OnInit {
   currentView: string = 'posts';
   userIdSlected:any = [];
 
-  constructor(private route: ActivatedRoute, private apiService:  ApiGetUserService ) { }
+  constructor(private route: ActivatedRoute, private apiService:  ApiGetUserService, private router: Router, ) { }
 
 
   ngOnInit(): void {
     this.apiService.getDataFromUsers().subscribe(data => {
         this.users = data;
-
         this.route.params.subscribe((param)=>{
           const userId = +param['id'];
         this.getUser(userId);
         });
       })
+
 }
 
 getUser(userId: number) {
@@ -67,4 +68,10 @@ getUser(userId: number) {
       this.switchView(viwe);
     });
   }
+  edite(userId:any) {
+    this.router.navigate(['admin', 'edite', userId]);
+    
+  }
+
+  
 }

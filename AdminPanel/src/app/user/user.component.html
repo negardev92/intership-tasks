@@ -36,8 +36,12 @@
                 alt="Avatar"
               />
               <hr>
-              <p class="card-text">UserName : {{ user?.username }}</p>
+              <p class="card-text">UserName : {{ user?.name }}</p>
               <p class="card-text">Email : {{ user?.email }}</p>
+              <button
+            (click)="edite(user.id)"
+            class="btn btn-light mx-2"
+          >Edite</button>
             </div>
           </div>
         </div>
@@ -73,3 +77,4 @@
     </div>
   </div>
 </div>
+

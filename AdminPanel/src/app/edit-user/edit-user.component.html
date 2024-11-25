@@ -1,0 +1,34 @@
+
+<div class="text-center" *ngIf="user">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="col-12 d-flex justify-content-center align-items-center">
+        <div class="card text-center bg-light mb-3 m-3" style="max-width: 80%">
+          <div class="card-body">
+            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp" class="rounded-3" style="width: 150px" alt="Avatar" />
+            <hr>
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" id="username" formControlName="username" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" id="password" formControlName="password" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="text" id="phone" formControlName="phone" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label for="Email" class="form-label">Email</label>
+                <input type="text" id="Email" formControlName="email" class="form-control" />
+              </div>
+            <div class="mb-3">
+              <label for="image" class="form-label">Image URL</label>
+              <input type="text" id="image" formControlName="image" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-light mx-2">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

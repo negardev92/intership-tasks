@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+interface User {
+  username: string;
+  email: string;
+  password: string;
+  phone: number; 
+  role: string; 
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -27,5 +33,8 @@ export class ApiGetUserService {
 
   getDataFromaTask(userId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiTask}?userId=${userId}`);
+  }
+  saveUsers(users: User[]) {
+    localStorage.setItem('users', JSON.stringify(users));
   }
 }
