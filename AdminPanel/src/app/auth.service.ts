@@ -48,7 +48,7 @@ login(username: string, password: string): boolean {
   }
 
   logout() {
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
     this.isAuthenticated.next(false); 
   }
 
