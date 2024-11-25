@@ -19,17 +19,20 @@ export class UserComponent implements OnInit {
   currentView: string = 'posts';
   userIdSlected:any = [];
 
-  constructor(private route: ActivatedRoute, private apiService:  ApiGetUserService, private router: Router, ) { }
+  constructor(private route: ActivatedRoute, private apiService:  ApiGetUserService, private router: Router,private userService: UserService ) { }
 
 
   ngOnInit(): void {
-    this.apiService.getDataFromUsers().subscribe(data => {
-        this.users = data;
+    // this.apiService.getDataFromUsers().subscribe(data => {
+    //   this.users = data;
+    this.users = JSON.parse(localStorage.getItem('users'));
+     
+      
         this.route.params.subscribe((param)=>{
           const userId = +param['id'];
         this.getUser(userId);
         });
-      })
+      // })
 
 }
 

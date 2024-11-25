@@ -15,15 +15,26 @@ export class AdminComponent implements OnInit {
   userId: any;
   searchTerm: string | null = null;
   filteredUsers: any[] = [];
-  constructor(private authService: AuthService, private route: ActivatedRoute, private apiService: ApiGetUserService, private router: Router,) { }
+  local:[]=[]
+  constructor(private authService: AuthService, private route: ActivatedRoute, private apiService: ApiGetUserService, private router: Router,private userService: UserService ) { }
 
 
   ngOnInit(): void {
     this.isAdmin = this.authService.getUser().role === 'admin';
     
+ 
     this.apiService.getDataFromUsers().subscribe(data => {
       this.users = data;
       localStorage.setItem('users', JSON.stringify(this.users));
+      
+    console.log(this.users);
+    
+      
+      this.userService.users$.subscribe(users => {
+        this.users = users;
+      });
+    
+      console.log(this.users);
       this.route.queryParams.subscribe(params => {
         this.searchTerm = params['search'] || null;
 
@@ -33,7 +44,7 @@ export class AdminComponent implements OnInit {
 
           );
         } else {
-          this.users = data;
+          // this.users = data;
         }
         
       });
@@ -42,7 +53,7 @@ export class AdminComponent implements OnInit {
  
   }
 
-
+ 
   filterUsers(searchTerm: string): void {
     if (!searchTerm) {
       this.filteredUsers = this.users;
@@ -75,7 +86,9 @@ export class AdminComponent implements OnInit {
 
   }
 
-
-
+  
 }
+
+
+
 

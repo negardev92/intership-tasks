@@ -6,16 +6,18 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private usersSource = new BehaviorSubject<any[]>([]);
+  private usersSource = new BehaviorSubject<any[]>(this.getLocalUsers());
   users$ = this.usersSource.asObservable();
 
-  constructor() {
-    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
-    this.usersSource.next(storedUsers);
+  constructor() {}
+
+  getLocalUsers(): any[] {
+    return JSON.parse(localStorage.getItem('users') || '[]');
   }
 
-  updateUsers(users: any[]) {
-    this.usersSource.next(users);
-    localStorage.setItem('users', JSON.stringify(users)); 
-  }
+  
+updateUsers(users: any[]) {
+  localStorage.setItem('users', JSON.stringify(users));
+  this.usersSource.next(users);
+}
 }
