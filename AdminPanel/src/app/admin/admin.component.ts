@@ -8,7 +8,7 @@ import { UserService } from '../satatemangementlocal.service';
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
-})
+})                                                                                                                                                                             
 export class AdminComponent implements OnInit {
   users: any[] = [];
   isAdmin: boolean = false;
@@ -22,10 +22,12 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.isAdmin = this.authService.getUser().role === 'admin';
     
- 
+
     this.apiService.getDataFromUsers().subscribe(data => {
       this.users = data;
-      localStorage.setItem('users', JSON.stringify(this.users));
+      if(localStorage==null){
+        localStorage.setItem('users', JSON.stringify(this.users));
+      }
       
     console.log(this.users);
     
@@ -50,9 +52,7 @@ export class AdminComponent implements OnInit {
       });
 
     });
- 
   }
-
  
   filterUsers(searchTerm: string): void {
     if (!searchTerm) {

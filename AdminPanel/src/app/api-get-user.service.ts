@@ -34,7 +34,5 @@ export class ApiGetUserService {
   getDataFromaTask(userId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiTask}?userId=${userId}`);
   }
-  saveUsers(users: User[]) {
-    localStorage.setItem('users', JSON.stringify(users));
-  }
+  
 }
