@@ -25,9 +25,9 @@ export class AdminComponent implements OnInit {
 
     this.apiService.getDataFromUsers().subscribe(data => {
       this.users = data;
-      if(localStorage==null){
+      
         localStorage.setItem('users', JSON.stringify(this.users));
-      }
+   
       
     console.log(this.users);
     
