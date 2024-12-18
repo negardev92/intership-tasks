@@ -1,12 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiGetUserService } from '../api-get-user.service';
-import { AuthService } from '../auth.service';
+import { ApiGetUserService } from '../../app/servise/api-get-user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../satatemangementlocal.service';
+import { UserService } from '../../app/servise/satatemangementlocal.service';
 
-interface User {
+interface IUser {
   id: number;
   name: string;
   email: string;
@@ -20,10 +19,10 @@ interface User {
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  users: User[] = [];
+  users: IUser[] = [];
   userForm!: FormGroup;
-  user!: User;
-  findUserEdite!: User;
+  user!: IUser;
+  findUserEdite!: IUser;
 
   constructor(
     private route: ActivatedRoute,
@@ -72,7 +71,7 @@ getUser(userId: number) {
 
 findMatchingUser(userId: number) {
   const storedUsers = JSON.parse(localStorage.getItem('apiusers') || '[]');
-  const matchingUser = storedUsers.find((storedUser: User) => storedUser.id === userId);
+  const matchingUser = storedUsers.find((storedUser: IUser) => storedUser.id === userId);
 
   if (matchingUser) {
     console.log('User found:', matchingUser);
@@ -82,41 +81,6 @@ findMatchingUser(userId: number) {
     this.findUserEdite = null!;
   }
 }
-  
-  // onSubmit() {
-    
-  //   if (this.userForm.valid) {
-
-  //     if (!this.findUserEdite) {
-  //       console.error('No user found to update.');
-  //       alert('No user found to update.');
-  //       return;
-  //     }
-
-  //     const updatedUser = {
-  //       ...this.findUserEdite,
-  //       name: this.userForm.value.username,
-  //       password: this.userForm.value.password,
-  //       phone: this.userForm.value.phone,
-  //       email: this.userForm.value.email,
-  //     };
-
-  //     const storedUsers = JSON.parse(localStorage.getItem('apiusers') || '[]');
-
-  //     const index = storedUsers.findIndex(user => user.name === this.findUserEdite.name)
-
-  //     if (index !== -1) {
-  //       storedUsers[index] = updatedUser;
-  //       this.userService.updateUsers(storedUsers);
-
-  //       alert('Changes saved successfully!');
-  //       this.router.navigate(['admin']);
-  //     } else {
-  //       console.error('User not found in local storage.');
-  //       alert('User not found in local storage.');
-  //     }
-  //   }
-  // }
   onSubmit() {
     if (this.userForm.valid) {
       if (!this.findUserEdite) {
@@ -135,13 +99,13 @@ findMatchingUser(userId: number) {
   
       const storedUsers = JSON.parse(localStorage.getItem('apiusers') || '[]');
   
-      // پیدا کردن کاربر بر اساس id
-      const index = storedUsers.findIndex((user: User) => user.id === this.findUserEdite.id);
+     
+      const index = storedUsers.findIndex((user: IUser) => user.id === this.findUserEdite.id);
   
       if (index !== -1) {
-        storedUsers[index] = updatedUser; // به‌روزرسانی کاربر
-        localStorage.setItem('apiusers', JSON.stringify(storedUsers)); // ذخیره به‌روزرسانی
-        this.userService.updateUsers(storedUsers); // به‌روزرسانی سرویس
+        storedUsers[index] = updatedUser; 
+        localStorage.setItem('apiusers', JSON.stringify(storedUsers));
+        this.userService.updateUsers(storedUsers); 
         
       this.findUserEdite = updatedUser;
         alert('Changes saved successfully!');

@@ -1,8 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiGetUserService } from '../api-get-user.service'; 
-import { UserService } from '../satatemangementlocal.service';
+import { ApiGetUserService } from '../../app/servise/api-get-user.service'; 
+import { UserService } from '../../app/servise/satatemangementlocal.service';
 
 
 @Component({

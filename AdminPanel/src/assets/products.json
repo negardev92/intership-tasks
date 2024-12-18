@@ -1,0 +1,352 @@
+[
+  {
+    "id": 1,
+    "name": "The Great Gatsby",
+    "price": 15.99,
+    "quantity": 12,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 2,
+    "name": "1984",
+    "price": 10.5,
+    "quantity": 30,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 3,
+    "name": "To Kill a Mockingbird",
+    "price": 12.99,
+    "quantity": 18,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Pride and Prejudice",
+    "price": 8.75,
+    "quantity": 22,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Moby Dick",
+    "price": 14.5,
+    "quantity": 15,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 6,
+    "name": "War and Peace",
+    "price": 20.0,
+    "quantity": 10,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Crime and Punishment",
+    "price": 16.45,
+    "quantity": 8,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 8,
+    "name": "The Catcher in the Rye",
+    "price": 13.0,
+    "quantity": 20,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Brave New World",
+    "price": 11.5,
+    "quantity": 25,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 10,
+    "name": "The Odyssey",
+    "price": 9.99,
+    "quantity": 27,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 11,
+    "name": "The Iliad",
+    "price": 10.99,
+    "quantity": 13,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 12,
+    "name": "The Hobbit",
+    "price": 15.0,
+    "quantity": 18,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 13,
+    "name": "A Tale of Two Cities",
+    "price": 12.25,
+    "quantity": 19,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Frankenstein",
+    "price": 11.75,
+    "quantity": 17,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Jane Eyre",
+    "price": 9.99,
+    "quantity": 14,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Wuthering Heights",
+    "price": 10.99,
+    "quantity": 23,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 17,
+    "name": "The Scarlet Letter",
+    "price": 7.5,
+    "quantity": 20,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 18,
+    "name": "Of Mice and Men",
+    "price": 8.99,
+    "quantity": 15,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Little Women",
+    "price": 12.5,
+    "quantity": 16,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Les Misérables",
+    "price": 18.99,
+    "quantity": 10,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 21,
+    "name": "Dracula",
+    "price": 10.0,
+    "quantity": 14,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 22,
+    "name": "The Picture of Dorian Gray",
+    "price": 13.45,
+    "quantity": 12,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 23,
+    "name": "Anna Karenina",
+    "price": 14.99,
+    "quantity": 8,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 24,
+    "name": "The Brothers Karamazov",
+    "price": 16.0,
+    "quantity": 7,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 25,
+    "name": "Middlemarch",
+    "price": 19.5,
+    "quantity": 9,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 26,
+    "name": "Ulysses",
+    "price": 21.0,
+    "quantity": 5,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 27,
+    "name": "The Sun Also Rises",
+    "price": 11.5,
+    "quantity": 10,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 28,
+    "name": "On the Road",
+    "price": 13.99,
+    "quantity": 9,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 29,
+    "name": "Slaughterhouse-Five",
+    "price": 12.5,
+    "quantity": 11,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 30,
+    "name": "The Old Man and the Sea",
+    "price": 8.75,
+    "quantity": 19,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 31,
+    "name": "Heart of Darkness",
+    "price": 9.5,
+    "quantity": 15,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 32,
+    "name": "Catch-22",
+    "price": 10.5,
+    "quantity": 10,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 33,
+    "name": "The Kite Runner",
+    "price": 14.75,
+    "quantity": 12,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 34,
+    "name": "Beloved",
+    "price": 11.0,
+    "quantity": 7,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 35,
+    "name": "The Road",
+    "price": 13.25,
+    "quantity": 6,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 36,
+    "name": "Invisible Man",
+    "price": 15.0,
+    "quantity": 8,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 37,
+    "name": "Gone with the Wind",
+    "price": 18.75,
+    "quantity": 5,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 38,
+    "name": "The Grapes of Wrath",
+    "price": 17.25,
+    "quantity": 4,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 39,
+    "name": "The Outsiders",
+    "price": 9.99,
+    "quantity": 13,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 40,
+    "name": "Fahrenheit 451",
+    "price": 10.0,
+    "quantity": 14,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 41,
+    "name": "The Handmaid's Tale",
+    "price": 14.25,
+    "quantity": 9,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 42,
+    "name": "The Secret Garden",
+    "price": 7.99,
+    "quantity": 15,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 43,
+    "name": "The Call of the Wild",
+    "price": 10.5,
+    "quantity": 17,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 44,
+    "name": "The Alchemist",
+    "price": 12.0,
+    "quantity": 13,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 45,
+    "name": "The Little Prince",
+    "price": 6.99,
+    "quantity": 20,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 46,
+    "name": "The Time Traveler's Wife",
+    "price": 13.5,
+    "quantity": 10,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 47,
+    "name": "The Night Circus",
+    "price": 14.25,
+    "quantity": 5,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 48,
+    "name": "Life After Life",
+    "price": 12.5,
+    "quantity": 6,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 49,
+    "name": "The Shadow of the Wind",
+    "price": 16.0,
+    "quantity": 8,
+    "imageUrl": "/image-book.jpg"
+  },
+  {
+    "id": 50,
+    "name": "The Hunger Games",
+    "price": 11.25,
+    "quantity": 14,
+    "imageUrl": "/image-book.jpg"
+  }
+]

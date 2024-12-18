@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiGetUserService } from '../api-get-user.service';
-import { AuthService } from '../auth.service';
+import { ApiGetUserService } from '../../app/servise/api-get-user.service';
+import { AuthService } from '../../app/servise/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../satatemangementlocal.service';
+import { UserService } from '../../app/servise/satatemangementlocal.service';;
 
 @Component({
   selector: 'app-admin',

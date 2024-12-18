@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './user/user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ShopingCartComponent } from './shoping-cart/shoping-cart.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductsDetailsComponent } from './products-details/products-details.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { ShopingCartComponent } from './shoping-cart/shoping-cart.component';
      UserComponent,
      EditUserComponent,
      ShopingCartComponent,
+     ProductsComponent,
+     ProductsDetailsComponent,
   ],
   imports: [
     BrowserModule,

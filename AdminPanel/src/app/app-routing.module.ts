@@ -6,13 +6,17 @@ import { RegisterComponent } from './register/register.component';
 import {  adminGuard } from './auth.guard';
 import { UserComponent } from './user/user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
-
+import { ShopingCartComponent } from './shoping-cart/shoping-cart.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductsDetailsComponent } from './products-details/products-details.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent, canActivate: [ adminGuard],children:[{ path: 'user/:id', component:UserComponent},{ path: 'edite/:id', component: EditUserComponent },] },
-  
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'shopingcart', component: ShopingCartComponent },
+  { path: 'products', component:  ProductsComponent },
+  { path: 'ProductsDetails ', component: ProductsDetailsComponent },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
 ];
 
 @NgModule({
