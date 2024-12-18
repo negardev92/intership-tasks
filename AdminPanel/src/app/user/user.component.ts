@@ -25,14 +25,15 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     // this.apiService.getDataFromUsers().subscribe(data => {
     //   this.users = data;
-    this.users = JSON.parse(localStorage.getItem('users'));
-     
+    
+    this.userService.users$.subscribe(users => {
+      this.users = users;
       
         this.route.params.subscribe((param)=>{
           const userId = +param['id'];
         this.getUser(userId);
         });
-      // })
+      })
 
 }
 

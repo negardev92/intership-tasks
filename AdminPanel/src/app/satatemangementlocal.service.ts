@@ -17,7 +17,7 @@ export class UserService {
 
   
 updateUsers(users: any[]) {
-  localStorage.setItem('users', JSON.stringify(users));
+  localStorage.setItem('apiusers', JSON.stringify(users)); 
   this.usersSource.next(users);
 }
 }

@@ -70,33 +70,61 @@ getUser(userId: number) {
   }
 }
 
-  findMatchingUser(userId: number) {
-    const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
-    const foundUserFromApi = this.users.find(userdata => userdata.id === userId);
+findMatchingUser(userId: number) {
+  const storedUsers = JSON.parse(localStorage.getItem('apiusers') || '[]');
+  const matchingUser = storedUsers.find((storedUser: User) => storedUser.id === userId);
 
-    console.log(foundUserFromApi)
-
-    if (foundUserFromApi) {
-      const matchingUser = storedUsers.find(storedUser => storedUser.name === foundUserFromApi.name);
-
-      if (matchingUser) {
-        console.log('user found:', matchingUser);
-        this.findUserEdite = matchingUser;
-      } else {
-        console.log('No matching user found in local storage.');
-      }
-    }
+  if (matchingUser) {
+    console.log('User found:', matchingUser);
+    this.findUserEdite = matchingUser;
+  } else {
+    console.log('No matching user found in local storage.');
+    this.findUserEdite = null!;
   }
-  onSubmit() {
+}
+  
+  // onSubmit() {
     
-    if (this.userForm.valid) {
+  //   if (this.userForm.valid) {
 
+  //     if (!this.findUserEdite) {
+  //       console.error('No user found to update.');
+  //       alert('No user found to update.');
+  //       return;
+  //     }
+
+  //     const updatedUser = {
+  //       ...this.findUserEdite,
+  //       name: this.userForm.value.username,
+  //       password: this.userForm.value.password,
+  //       phone: this.userForm.value.phone,
+  //       email: this.userForm.value.email,
+  //     };
+
+  //     const storedUsers = JSON.parse(localStorage.getItem('apiusers') || '[]');
+
+  //     const index = storedUsers.findIndex(user => user.name === this.findUserEdite.name)
+
+  //     if (index !== -1) {
+  //       storedUsers[index] = updatedUser;
+  //       this.userService.updateUsers(storedUsers);
+
+  //       alert('Changes saved successfully!');
+  //       this.router.navigate(['admin']);
+  //     } else {
+  //       console.error('User not found in local storage.');
+  //       alert('User not found in local storage.');
+  //     }
+  //   }
+  // }
+  onSubmit() {
+    if (this.userForm.valid) {
       if (!this.findUserEdite) {
         console.error('No user found to update.');
         alert('No user found to update.');
         return;
       }
-
+  
       const updatedUser = {
         ...this.findUserEdite,
         name: this.userForm.value.username,
@@ -104,15 +132,18 @@ getUser(userId: number) {
         phone: this.userForm.value.phone,
         email: this.userForm.value.email,
       };
-
-      const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
-
-      const index = storedUsers.findIndex(user => user.name === this.findUserEdite.name)
-
+  
+      const storedUsers = JSON.parse(localStorage.getItem('apiusers') || '[]');
+  
+      // پیدا کردن کاربر بر اساس id
+      const index = storedUsers.findIndex((user: User) => user.id === this.findUserEdite.id);
+  
       if (index !== -1) {
-        storedUsers[index] = updatedUser;
-        this.userService.updateUsers(storedUsers);
-
+        storedUsers[index] = updatedUser; // به‌روزرسانی کاربر
+        localStorage.setItem('apiusers', JSON.stringify(storedUsers)); // ذخیره به‌روزرسانی
+        this.userService.updateUsers(storedUsers); // به‌روزرسانی سرویس
+        
+      this.findUserEdite = updatedUser;
         alert('Changes saved successfully!');
         this.router.navigate(['admin']);
       } else {
