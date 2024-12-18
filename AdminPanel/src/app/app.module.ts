@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './user/user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { ShopingCartComponent } from './shoping-cart/shoping-cart.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
      NavbarComponent,
      UserComponent,
      EditUserComponent,
+     ShopingCartComponent,
   ],
   imports: [
     BrowserModule,

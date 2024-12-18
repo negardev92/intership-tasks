@@ -39,7 +39,7 @@ login(username: string, password: string): boolean {
   const user = users.find((u: { username: string; password: string }) => u.username === username && u.password === password);
 
   if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('users', JSON.stringify(user));
       this.isAuthenticated.next(true); 
       return true;
   }
@@ -48,7 +48,7 @@ login(username: string, password: string): boolean {
   }
 
   logout() {
-    // localStorage.removeItem('users');
+     //localStorage.removeItem('users');
     this.isAuthenticated.next(false); 
   }
 
