@@ -13,9 +13,12 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent, canActivate: [ adminGuard],children:[{ path: 'user/:id', component:UserComponent},{ path: 'edite/:id', component: EditUserComponent },] },
-  { path: 'shopingcart', component: ShopingCartComponent },
-  { path: 'products', component:  ProductsComponent },
-  { path: 'ProductsDetails ', component: ProductsDetailsComponent },
+  
+  { path: 'products', component:  ProductsComponent ,children:[
+    { path: 'products/shopingcart', component: ShopingCartComponent , canActivate: [adminGuard] },
+    { path: 'ProductsDetails/:id', component: ProductsDetailsComponent },
+  ] },
+  
   { path: '', redirectTo: '/products', pathMatch: 'full' },
 ];
 

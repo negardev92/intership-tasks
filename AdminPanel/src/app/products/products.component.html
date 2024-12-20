@@ -1,1 +1,24 @@
-<p>products works!</p>
+<div class="container mt-4" >
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let product of products">
+        <div class="card h-100 shadow-sm">
+          <img 
+            [src]="product.imageUrl" 
+            class="card-img-top" 
+            alt="{{ product.name }}" 
+            onError="this.src='https://via.placeholder.com/150';" 
+          />
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ product.name }}</h5>
+            <p class="card-text text-muted text-center">
+              قیمت: {{ product.price | currency:  'تومان' }}
+            </p>
+          </div>
+          <div class="card-footer text-center">
+            <button class="btn btn-primary" (click)="moredetil(product.id)">  دیدن جزئیات بیشتر </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
