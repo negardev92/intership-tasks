@@ -10,9 +10,12 @@ export class ProductsComponent implements OnInit{
   products:any[]
 isLoggedIn: any;
 productId!: number;
+selectedProduct: any = null;
 constructor(private GetApiprodcut:GetApiProdcutsService,private router: Router,private route: ActivatedRoute){}
 ngOnInit(){
   this.GetApiPro(); 
+  this.closeModal();
+
   this.route.params.subscribe(params => {
     this.productId = +params['id']; 
   });
@@ -26,8 +29,30 @@ ngOnInit(){
  }
 
  moredetil(productId){
-  this.router.navigate(['products/ProductsDetails', productId]);
+   this.router.navigate(['products/ProductsDetails', productId]);
+  
+  this.openModal(productId);
  }
+ 
+ openModal(productId:number) {
+  this.selectedProduct = this.products.find(product => product.id === productId); 
+  
+  const modalElement = document.getElementById('productDetailsModal');
+  if (modalElement) {
+    modalElement.style.display = 'block';
+    modalElement.classList.add('show');
+  }else {
+    console.error('Products not loaded yet!');
+  }
+}
+
+closeModal() {
+  const modalElement = document.getElementById('productDetailsModal');
+  if (modalElement) {
+    modalElement.style.display = 'none';
+    modalElement.classList.remove('show');
+  }
+}
 
 
 
