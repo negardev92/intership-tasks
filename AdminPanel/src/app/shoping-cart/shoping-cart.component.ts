@@ -8,34 +8,34 @@ import { CartService } from '../servise/shared.service';
 })
 export class ShopingCartComponent {
   cartItems: any[] = [];
-  totalPrice: any;
   
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
     this.cartService.cartItems$.subscribe((items) => {
-      this.cartItems = items;
-      this.calculateTotal();
+      this.cartItems = items; 
+     
     });
   }
-
-  increaseItemQuantity(productId: number, maxQuantity: number) {
-    this.cartService.increaseQuantity(productId, maxQuantity);
+ 
+  increaseQuantity(item: any) {
+    this.cartService.updateQuantity(item.product.id, item.quantity + 1)
   }
 
-  decreaseItemQuantity(productId: number) {
-    this.cartService.decreaseQuantity(productId);
+  decreaseQuantity(item: any) {
+    if (item.quantity > 0) {
+      this.cartService.updateQuantity(item.product.id, item.quantity - 1);
+    }
   }
-
   calculateTotal() {
-    this.totalPrice = this.cartService.calculateTotal();
+    return this.cartItems.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    );
   }
-}
- 
-  
 
- 
 
- 
+
+  }
 

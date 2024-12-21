@@ -1,4 +1,5 @@
-<div class="d-flex">
+
+<div class="d-flex"> 
   <div class="sidebar bg-light p-3" style="width: 300px; height: 100vh; overflow-y: auto;">
     <h4 class="text-center">سبد خرید</h4>
     <hr />
@@ -15,9 +16,9 @@
           قیمت: {{ item.product.price | currency:'تومان' }}
         </p>
         <div class="d-flex align-items-center">
-          <button class="btn btn-sm btn-outline-danger me-2" (click)="decreaseItemQuantity(item.product.id)">-</button>
+          <button class="btn btn-sm btn-outline-danger me-2" (click)="decreaseQuantity(item)">-</button>
           <span>{{ item.quantity }}</span>
-          <button class="btn btn-sm btn-outline-success ms-2" (click)="increaseItemQuantity(item.product.id, item.product.stock)">+</button>
+          <button class="btn btn-sm btn-outline-success ms-2" (click)="increaseQuantity(item)">+</button>
         </div>
         <p class="mt-1 mb-0">
           قیمت کل: {{ item.product.price * item.quantity | currency:'تومان' }}
@@ -25,7 +26,9 @@
       </div>
     </div>
     <hr />
-    <h5 class="text-center">جمع کل: {{ totalPrice | currency:'تومان' }}</h5>
+    <h5 class="text-center">جمع کل: {{ calculateTotal() | currency:'تومان' }}</h5>
     <button class="btn btn-success w-100 mt-3">تایید خرید</button>
   </div>
 </div>
+
+

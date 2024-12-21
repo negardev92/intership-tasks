@@ -33,7 +33,7 @@ export class ProductsDetailsComponent implements OnInit {
 
 
   increaseQuantity() {
-    this.cartService.increaseQuantity(this.productDetails.id, this.productDetails.quantity);
+    this.cartService.increaseQuantity(this.productDetails.id);
   }
 
   decreaseQuantity() {
@@ -50,7 +50,7 @@ export class ProductsDetailsComponent implements OnInit {
           quantity: this.quantity,
         };
     
-        this.cartService.addToCart(cartItem);
+       
         const updatedItem = this.cartService.getCartItemById(this.productDetails.id);
         this.quantity = updatedItem ? updatedItem.quantity : 0;
       } 

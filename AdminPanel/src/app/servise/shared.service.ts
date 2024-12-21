@@ -49,12 +49,15 @@ export class CartService {
     }
   }
 
-  increaseQuantity(productId: number, maxQuantity: number) {
+  increaseQuantity(productId: number) {
     
     const cartItem = this.getCartItemById(productId);
-    if (cartItem && cartItem.quantity < maxQuantity) {
-      this.updateQuantity(productId, cartItem.quantity + 1);
-    } else if (!cartItem && maxQuantity > 0) {
+    const items = this.cartItemsSubject.value;
+    const itemIndex = items.findIndex(item => item.product?.id === productId);
+    if (cartItem && cartItem.quantity ) {
+      items[itemIndex].quantity = Math.max(0, items[itemIndex].quantity + 1);
+      this.cartItemsSubject.next(items);
+    } else if (!cartItem ) {
       this.addToCart({ product: { id: productId }, quantity: 1 });
     }
   }
