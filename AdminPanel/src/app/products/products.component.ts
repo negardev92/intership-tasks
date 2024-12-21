@@ -1,17 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import {GetApiProdcutsService } from '../servise/get-api-prodcuts.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from '../servise/shared.service';
+
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number; 
+  imageUrl: string;
+}
+export interface CartItem {
+  product: Product;
+  quantity: number;// chose clinet 
+}
+
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
+
+
 export class ProductsComponent implements OnInit{
-  products:any[]
-isLoggedIn: any;
-productId!: number;
-selectedProduct: any = null;
-constructor(private GetApiprodcut:GetApiProdcutsService,private router: Router,private route: ActivatedRoute){}
+  products: Product[] = []; 
+  // isLoggedIn: boolean = false;
+  productId!: number;
+  selectedProduct: Product | null = null; 
+  cartItems: CartItem[] = [];
+  isCartVisible = false;
+
+
+constructor(private GetApiprodcut:GetApiProdcutsService,private router: Router,private route: ActivatedRoute, private cartService: CartService){}
 ngOnInit(){
   this.GetApiPro(); 
   this.closeModal();
@@ -27,6 +48,9 @@ ngOnInit(){
     this.products = data;
   });
  }
+ toggleCart() {
+  this.isCartVisible = !this.isCartVisible; 
+}
 
  moredetil(productId){
    this.router.navigate(['products/ProductsDetails', productId]);
@@ -53,7 +77,10 @@ closeModal() {
     modalElement.classList.remove('show');
   }
 }
-
-
+handleAddToCart(cartItem: CartItem) {
+  this.cartService.addToCart(cartItem);
+  
 
 }
+}
+

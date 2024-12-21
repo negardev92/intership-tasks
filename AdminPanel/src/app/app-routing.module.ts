@@ -15,8 +15,9 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [ adminGuard],children:[{ path: 'user/:id', component:UserComponent},{ path: 'edite/:id', component: EditUserComponent },] },
   
   { path: 'products', component:  ProductsComponent ,children:[
-    { path: 'products/shopingcart', component: ShopingCartComponent , canActivate: [adminGuard] },
+    { path: 'shopingcart', component: ShopingCartComponent },
     { path: 'ProductsDetails/:id', component: ProductsDetailsComponent },
+    
   ] },
   
   { path: '', redirectTo: '/products', pathMatch: 'full' },

@@ -1,6 +1,6 @@
-import {GetApiProdcutsService } from '../servise/get-api-prodcuts.service';
-import { ActivatedRoute, Router } from '@angular/router';
+
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { CartService } from '../servise/shared.service';
 
 @Component({
   selector: 'app-products-details',
@@ -8,32 +8,56 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
   styleUrls: ['./products-details.component.css']
 })
 export class ProductsDetailsComponent implements OnInit {
-  @Input() productDetails: any; // اطلاعات محصول
-  @Output() addToCartEvent = new EventEmitter<any>(); 
-  quantity: number = 1; 
+  @Input() productDetails: any; 
+  @Output() addToCartEvent = new EventEmitter<any>();
+  quantity: number = 0;
 
-  constructor() {}
 
-  ngOnInit() {}
+
+  constructor(private cartService: CartService) {}
+ 
+  ngOnInit() {
+    
+    if (this.productDetails) {
+      const cartItem = this.cartService.getCartItemById(this.productDetails.id);
+      if (cartItem) {
+        this.quantity = cartItem.quantity;
+      }
+    }
+  
+    this.cartService.cartItems$.subscribe((items) => {
+      const cartItem = items.find(item => item.product?.id === this.productDetails?.id);
+      this.quantity = cartItem ? cartItem.quantity : 0;
+    });
+  }
+
 
   increaseQuantity() {
-    if (this.quantity < this.productDetails.stock) {
-      this.quantity++;
-    }
+    this.cartService.increaseQuantity(this.productDetails.id, this.productDetails.quantity);
   }
 
   decreaseQuantity() {
-    if (this.quantity > 1) {
-      this.quantity--;
-    }
+    this.cartService.decreaseQuantity(this.productDetails.id);
   }
 
   addToCart() {
-    const cartItem = {
-      product: this.productDetails,
-      quantity: this.quantity
-    };
-    this.addToCartEvent.emit(cartItem); // ارسال اطلاعات به والد
+      console.log('Quantity:', this.quantity);
+      console.log('Product Details:', this.productDetails);
+    
+      if (this.quantity > 0 && this.quantity <= this.productDetails.quantity) {
+        const cartItem = {
+          product: this.productDetails,
+          quantity: this.quantity,
+        };
+    
+        this.cartService.addToCart(cartItem);
+        const updatedItem = this.cartService.getCartItemById(this.productDetails.id);
+        this.quantity = updatedItem ? updatedItem.quantity : 0;
+      } 
+    }
+    
   }
-}
+  
+
+
 

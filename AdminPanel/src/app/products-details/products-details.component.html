@@ -1,14 +1,18 @@
 <div *ngIf="productDetails" class="product-details">
-    <img [src]="productDetails.imageUrl" alt="{{ productDetails.name }}" class="product-image" />
-    <h3>{{ productDetails.name }}</h3>
-    <p class="product-description">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.</p>
-    <p>قیمت: {{ productDetails.price | currency: 'تومان' }}</p>
-    
-    <div class="quantity-controls">
-      <button (click)="decreaseQuantity()" [disabled]="quantity <= 1">-</button>
-      <span>{{ quantity }}</span>
-      <button (click)="increaseQuantity()" [disabled]="quantity >= productDetails.stock">+</button>
-    </div>
-  
-    <button class="btn btn-success add-to-cart" (click)="addToCart()">افزودن به سبد خرید</button>
+  <img [src]="productDetails.imageUrl" alt="{{ productDetails.name }}" class="product-image" />
+  <h3>{{ productDetails.name }}</h3>
+  <p>قیمت: {{ productDetails.price | currency:'تومان' }}</p>
+
+  <div class="quantity-controls">
+    <button (click)="decreaseQuantity()" [disabled]="quantity <= 1">-</button>
+    <span>{{ quantity }}</span>
+    <button (click)="increaseQuantity()" [disabled]="quantity >= productDetails.quantity">+</button>
   </div>
+
+  <button
+  class="btn btn-success add-to-cart"
+  (click)="addToCart()"
+  [disabled]="quantity < 1 || quantity > productDetails.quantity">
+  افزودن به سبد خرید
+  </button>
+</div>

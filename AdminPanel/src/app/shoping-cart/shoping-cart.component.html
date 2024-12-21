@@ -1,1 +1,31 @@
-<p>shoping-cart works!</p>
+<div class="d-flex">
+  <div class="sidebar bg-light p-3" style="width: 300px; height: 100vh; overflow-y: auto;">
+    <h4 class="text-center">سبد خرید</h4>
+    <hr />
+    <div *ngFor="let item of cartItems" class="cart-item d-flex mb-3">
+      <img
+        [src]="item.product.image"
+        alt="{{ item.product.name }}"
+        class="img-thumbnail"
+        style="width: 70px; height: 70px;"
+      />
+      <div class="ms-3 w-100">
+        <h6 class="mb-1">{{ item.product.name }}</h6>
+        <p class="mb-1">
+          قیمت: {{ item.product.price | currency:'تومان' }}
+        </p>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-sm btn-outline-danger me-2" (click)="decreaseItemQuantity(item.product.id)">-</button>
+          <span>{{ item.quantity }}</span>
+          <button class="btn btn-sm btn-outline-success ms-2" (click)="increaseItemQuantity(item.product.id, item.product.stock)">+</button>
+        </div>
+        <p class="mt-1 mb-0">
+          قیمت کل: {{ item.product.price * item.quantity | currency:'تومان' }}
+        </p>
+      </div>
+    </div>
+    <hr />
+    <h5 class="text-center">جمع کل: {{ totalPrice | currency:'تومان' }}</h5>
+    <button class="btn btn-success w-100 mt-3">تایید خرید</button>
+  </div>
+</div>
