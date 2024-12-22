@@ -27,7 +27,8 @@ import { ProductsDetailsComponent } from './products-details/products-details.co
      EditUserComponent,
      ShopingCartComponent,
      ProductsComponent,
-     ProductsDetailsComponent,
+     ProductsDetailsComponent
+      
   ],
   imports: [
     BrowserModule,
