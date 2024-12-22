@@ -12,25 +12,32 @@ export class ProductsDetailsComponent implements OnInit {
   @Output() addToCartEvent = new EventEmitter<any>();
   quantity: number = 0;
 
-
-
   constructor(private cartService: CartService) {}
- 
+
+  // ngOnInit() {
+  //   if (this.productDetails) {
+  //     const cartItem = this.cartService.getCartItemById(this.productDetails.id);
+  //     if (cartItem) {
+  //       this.quantity = cartItem.counter;
+  //     }
+  //   }
+
+  //   this.cartService.cartItems$.subscribe((items) => {
+  //     const cartItem = items.find(item => item.id === this.productDetails?.id);
+  //     this.quantity = cartItem ? cartItem.counter : 0;
+  //   });
+  // }
   ngOnInit() {
-    
     if (this.productDetails) {
       const cartItem = this.cartService.getCartItemById(this.productDetails.id);
-      if (cartItem) {
-        this.quantity = cartItem.quantity;
-      }
+      this.quantity = cartItem ? cartItem.counter : 0; // تعداد از سبد خرید
     }
   
     this.cartService.cartItems$.subscribe((items) => {
-      const cartItem = items.find(item => item.product?.id === this.productDetails?.id);
-      this.quantity = cartItem ? cartItem.quantity : 0;
+      const cartItem = items.find(item => item.id === this.productDetails?.id);
+      this.quantity = cartItem ? cartItem.counter : 0;
     });
   }
-
 
   increaseQuantity() {
     this.cartService.increaseQuantity(this.productDetails.id);
@@ -41,22 +48,22 @@ export class ProductsDetailsComponent implements OnInit {
   }
 
   addToCart() {
-      console.log('Quantity:', this.quantity);
-      console.log('Product Details:', this.productDetails);
     
       if (this.quantity > 0 && this.quantity <= this.productDetails.quantity) {
         const cartItem = {
-          product: this.productDetails,
-          quantity: this.quantity,
+          id: this.productDetails.id,
+          name: this.productDetails.name,
+          price: this.productDetails.price,
+          imageUrl: this.productDetails.imageUrl,
+          counter: this.quantity, 
+          quantity: this.productDetails.quantity 
         };
-    
-       
-        const updatedItem = this.cartService.getCartItemById(this.productDetails.id);
-        this.quantity = updatedItem ? updatedItem.quantity : 0;
-      } 
-    }
-    
+        
+        this.cartService.addToCart(cartItem);
+      }
   }
+}
+
   
 
 

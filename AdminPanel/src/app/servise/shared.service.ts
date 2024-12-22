@@ -1,83 +1,76 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+export interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
+  counter: number;
+}
+
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CartService {
-  private cartItemsSubject = new BehaviorSubject<any[]>([]); 
-  cartItems$ = this.cartItemsSubject.asObservable(); 
+  private cartItems: CartItem[] = [];
+  private cartSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
+  cartItems$ = this.cartSubject.asObservable();
 
   constructor() {}
 
+  // ارسال اطلاعات سبد خرید به کامپوننت‌ها
   getCartItems() {
-    return this.cartItemsSubject.value;
+    return this.cartSubject.asObservable();
   }
 
-  getCartItemById(productId: number) {
-    return this.getCartItems().find((item) => item.product?.id === productId);
-  }
-
-  addToCart(newItem: any) {
-    const existingItems = this.getCartItems();
-    const existingItem = existingItems.find(
-      (item) => item.product.id === newItem.product.id
-    );
-  
-
-    if (existingItem) {
-      this.updateQuantity(
-        newItem.product.id,
-        existingItem.quantity + newItem.quantity
-      );
-    } else {
-      this.cartItemsSubject.next([...existingItems, newItem]);
-    }
-  }
-  
-
-  updateQuantity(productId: number, quantity: number) {
-    const items = this.cartItemsSubject.value;
-    const itemIndex = items.findIndex(item => item.product?.id === productId);
-  
-    if (itemIndex !== -1) {
-      items[itemIndex].quantity = quantity;
-      this.cartItemsSubject.next(items);
-    } else {
-      console.error('Item not found in cart!');
-      this.addToCart({ product: { id: productId }, quantity });
-    }
-  }
-
-  increaseQuantity(productId: number) {
+  // افزودن محصول به سبد خرید
+ 
+    addToCart(product: CartItem) {
+      
+      const existingItem = this.cartItems.find(item => item.id === product.id);
+      
+      if (existingItem) {
+        // اگر محصول قبلاً در سبد خرید وجود دارد، تعداد آن را به‌روز می‌کنیم
+        existingItem.counter += product.counter;
+      } else {
+        // اگر محصول جدید است، آن را به سبد خرید اضافه می‌کنیم
+        this.cartItems.push(product);
+      }
+      
+      // بروزرسانی وضعیت سبد خرید با استفاده از BehaviorSubject
+      this.cartSubject.next(this.cartItems);
+    };
     
-    const cartItem = this.getCartItemById(productId);
-    const items = this.cartItemsSubject.value;
-    const itemIndex = items.findIndex(item => item.product?.id === productId);
-    if (cartItem && cartItem.quantity ) {
-      items[itemIndex].quantity = Math.max(0, items[itemIndex].quantity + 1);
-      this.cartItemsSubject.next(items);
-    } else if (!cartItem ) {
-      this.addToCart({ product: { id: productId }, quantity: 1 });
-    }
-  }
   
-  decreaseQuantity(productId: number) {
-    const items = this.cartItemsSubject.value;
-    const itemIndex = items.findIndex(item => item.product?.id === productId);
+
   
-    if (itemIndex !== -1) {
-      items[itemIndex].quantity = Math.max(0, items[itemIndex].quantity - 1);
-      this.cartItemsSubject.next(items);
-    } else {
-      console.error('Item not found in cart!');
+  increaseQuantity(productId: number) {
+    const item = this.cartItems.find(item => item.id === productId);
+    if (item && item.counter < item.quantity) {
+      item.counter++;
+      this.cartSubject.next(this.cartItems); 
     }
   }
 
-  calculateTotal() {
-    return this.getCartItems().reduce(
-      (total, item) => total + item.product.price * item.quantity,
-      0
-    );
+  // کاهش تعداد محصول
+  decreaseQuantity(productId: number) {
+    const item = this.cartItems.find(item => item.id === productId);
+    if (item && item.counter > 1) {
+      item.counter--;
+      this.cartSubject.next(this.cartItems); // بروزرسانی وضعیت سبد خرید
+    }
+  }
+
+  // حذف محصول از سبد خرید
+  removeFromCart(productId: number) {
+    this.cartItems = this.cartItems.filter(item => item.id !== productId);
+    this.cartSubject.next(this.cartItems); // بروزرسانی وضعیت سبد خرید
+  }
+
+  // دریافت محصول از سبد خرید بر اساس ID
+  getCartItemById(productId: number): CartItem | undefined {
+    return this.cartItems.find(item => item.id === productId);
   }
 }

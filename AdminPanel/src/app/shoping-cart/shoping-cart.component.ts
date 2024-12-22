@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CartService } from '../servise/shared.service';
+import { CartItem, CartService } from '../servise/shared.service';
 
 @Component({
   selector: 'app-shoping-cart',
@@ -7,35 +7,43 @@ import { CartService } from '../servise/shared.service';
   styleUrls: ['./shoping-cart.component.css']
 })
 export class ShopingCartComponent {
-  cartItems: any[] = [];
+  cartItems: CartItem[] = [];
+  totalPrice: number = 0; 
+  isSidebarOpen: boolean = false; 
+    constructor(private cartService: CartService) {}
   
-
-  constructor(private cartService: CartService) {}
-
-  ngOnInit() {
-    this.cartService.cartItems$.subscribe((items) => {
-      this.cartItems = items; 
-     
-    });
-  }
- 
-  increaseQuantity(item: any) {
-    this.cartService.updateQuantity(item.product.id, item.quantity + 1)
-  }
-
-  decreaseQuantity(item: any) {
-    if (item.quantity > 0) {
-      this.cartService.updateQuantity(item.product.id, item.quantity - 1);
+    ngOnInit(): void {
+      this.cartService.cartItems$.subscribe((items) => {
+        this.cartItems = items;
+         this.calculateTotal();  
+      });
     }
+ 
+  increaseQuantity(productId: number) {
+    this.cartService.increaseQuantity(productId);
+  }
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+  preventClose(event: MouseEvent) {
+    event.stopPropagation(); 
+  }
+  
+  decreaseQuantity(productId: number) {
+    this.cartService.decreaseQuantity(productId);
+  }
+
+  removeFromCart(productId: number) {
+    this.cartService.removeFromCart(productId);
   }
   calculateTotal() {
-    return this.cartItems.reduce(
-      (total, item) => total + item.product.price * item.quantity,
+    this.totalPrice = this.cartItems.reduce(
+      (total, item) => total + (item.price * item.counter),
       0
     );
   }
+}
 
 
-
-  }
+ 
 

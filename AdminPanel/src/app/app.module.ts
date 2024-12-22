@@ -16,6 +16,7 @@ import { ShopingCartComponent } from './shoping-cart/shoping-cart.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsDetailsComponent } from './products-details/products-details.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

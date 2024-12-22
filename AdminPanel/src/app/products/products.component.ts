@@ -1,86 +1,84 @@
 import { Component, OnInit } from '@angular/core';
-import {GetApiProdcutsService } from '../servise/get-api-prodcuts.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { GetApiProdcutsService } from '../servise/get-api-prodcuts.service';
+import { Router } from '@angular/router';
 import { CartService } from '../servise/shared.service';
+import * as bootstrap from 'bootstrap';
 
 export interface Product {
   id: number;
   name: string;
   price: number;
-  quantity: number; 
+  quantity: number;
   imageUrl: string;
+  counter?: number;
 }
-export interface CartItem {
-  product: Product;
-  quantity: number;// chose clinet 
-}
-
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
+export class ProductsComponent implements OnInit {
+  products: Product[] = [];
+  selectedProduct: Product | null = null;
 
+  constructor(
+    private GetApiprodcut: GetApiProdcutsService,
+    private cartService: CartService
+  ) {}
 
-export class ProductsComponent implements OnInit{
-  products: Product[] = []; 
-  // isLoggedIn: boolean = false;
-  productId!: number;
-  selectedProduct: Product | null = null; 
-  cartItems: CartItem[] = [];
-  isCartVisible = false;
+  ngOnInit() {
+     this.GetApiPro();
+  }
 
+  GetApiPro() {
+    this.GetApiprodcut.getDataProdcut().subscribe(data => {
+      this.products = data.map(product => ({
+        ...product,
+        counter: 1
+      }));
+    });
+  }
 
-constructor(private GetApiprodcut:GetApiProdcutsService,private router: Router,private route: ActivatedRoute, private cartService: CartService){}
-ngOnInit(){
-  this.GetApiPro(); 
-  this.closeModal();
-
-  this.route.params.subscribe(params => {
-    this.productId = +params['id']; 
-  });
-}
-
-
- GetApiPro(){
-  this.GetApiprodcut. getDataProdcut().subscribe(data => {
-    this.products = data;
-  });
- }
- toggleCart() {
-  this.isCartVisible = !this.isCartVisible; 
-}
-
- moredetil(productId){
-   this.router.navigate(['products/ProductsDetails', productId]);
+  openModal(product: Product) {
+    
+    const cartItem = this.cartService.getCartItemById(product.id);
+    this.selectedProduct = {
+      ...product,
+      counter: cartItem ? cartItem.counter : 1 // اگر در سبد خرید است، مقدار را بگیر وگرنه مقدار اولیه 1 باشد
+    };
   
-  this.openModal(productId);
- }
+    const modalElement = document.getElementById('productDetailsModal');
+    if (modalElement) {
+      const bootstrapModal = new bootstrap.Modal(modalElement);
+      bootstrapModal.show();
+    }
+  }
  
- openModal(productId:number) {
-  this.selectedProduct = this.products.find(product => product.id === productId); 
-  
-  const modalElement = document.getElementById('productDetailsModal');
-  if (modalElement) {
-    modalElement.style.display = 'block';
-    modalElement.classList.add('show');
-  }else {
-    console.error('Products not loaded yet!');
-  }
-}
-
-closeModal() {
-  const modalElement = document.getElementById('productDetailsModal');
-  if (modalElement) {
-    modalElement.style.display = 'none';
-    modalElement.classList.remove('show');
-  }
-}
-handleAddToCart(cartItem: CartItem) {
-  this.cartService.addToCart(cartItem);
   
 
+  increaseQuantity() {
+    if (this.selectedProduct && this.selectedProduct.counter < this.selectedProduct.quantity) {
+      this.selectedProduct.counter++;
+    }
+  }
+
+  decreaseQuantity() {
+    if (this.selectedProduct && this.selectedProduct.counter > 1) {
+      this.selectedProduct.counter--;
+    }
+  }
+
+  addToCart() {
+    if (this.selectedProduct && this.selectedProduct.counter >= 1) {
+      const cartItem = { ...this.selectedProduct, counter: this.selectedProduct.counter };
+        this.cartService.addToCart(cartItem);
+    }
+  }
 }
-}
+ 
+  
+
+
+
 
