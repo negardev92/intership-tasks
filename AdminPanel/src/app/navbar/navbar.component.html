@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div *ngIf="isLoggedIn; else logouts" class="d-flex justify-content-end w-100">
       <div class="d-flex justify-content-first w-100">
-        
+        <app-shoping-cart *ngIf="isLoggedIn"></app-shoping-cart>
       </div>
       
       <span class="navbar-text text-white me-3">{{ username }}</span>

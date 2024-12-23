@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GetApiProdcutsService } from '../servise/get-api-prodcuts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../servise/shared.service';
+import { AuthService } from '../../app/servise/auth.service'
 import * as bootstrap from 'bootstrap';
 
 export interface Product {
@@ -23,15 +24,21 @@ export class ProductsComponent implements OnInit {
   selectedProduct: Product | null = null;
   filteredProducts: Product[] = [];
   searchTerm: string = ''; // متغیر جستجو
-  
+  isLoggedIn: boolean = false;
   constructor(
     private GetApiprodcut: GetApiProdcutsService,
     private cartService: CartService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    this.authService.isLoggedIn().subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;  
+    });
+  
+
      this.GetApiPro();
 
      this.route.queryParams.subscribe(params => {

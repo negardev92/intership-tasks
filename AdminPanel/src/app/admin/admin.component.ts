@@ -21,7 +21,7 @@ export class AdminComponent implements OnInit {
 
     this.apiService.getDataFromUsers().subscribe(data => {
       this.ApiUsers = data;
-      this.userService.updateUsers(data);
+      // this.userService.updateUsers(data);
     });
 
     this.userService.users$.subscribe(users => {
