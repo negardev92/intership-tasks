@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetApiProdcutsService } from '../servise/get-api-prodcuts.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../servise/shared.service';
 import * as bootstrap from 'bootstrap';
 
@@ -21,14 +21,24 @@ export interface Product {
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
   selectedProduct: Product | null = null;
-
+  filteredProducts: Product[] = [];
+  searchTerm: string = ''; // متغیر جستجو
+  
   constructor(
     private GetApiprodcut: GetApiProdcutsService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
      this.GetApiPro();
+
+     this.route.queryParams.subscribe(params => {
+      this.searchTerm = params['search'] || '';
+      this.filterProducts(this.searchTerm, false); 
+    });
+    this.filterProducts(this.searchTerm, false);
   }
 
   GetApiPro() {
@@ -37,7 +47,34 @@ export class ProductsComponent implements OnInit {
         ...product,
         counter: 1
       }));
+     
+      this.filterProducts(this.searchTerm, false);
     });
+    
+  }
+   //سرچ 
+   filterProducts(searchTerm: string, updateQuery: boolean = true): void {
+   //خالی
+    if (!searchTerm) {
+      
+      this.filteredProducts = [...this.products];
+      
+      if (updateQuery) {
+        this.router.navigate([], { queryParams: { search: null }, queryParamsHandling: 'merge' });
+      }
+      return;
+    }
+  // فیلتر
+    this.filteredProducts = this.products.filter(x =>
+      x.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  
+   
+    if (updateQuery) {
+      this.router.navigate([], { queryParams: { search: searchTerm }, queryParamsHandling: 'merge' });
+    }
+  
+    
   }
 
   openModal(product: Product) {
@@ -45,7 +82,7 @@ export class ProductsComponent implements OnInit {
     const cartItem = this.cartService.getCartItemById(product.id);
     this.selectedProduct = {
       ...product,
-      counter: cartItem ? cartItem.counter : 1 // اگر در سبد خرید است، مقدار را بگیر وگرنه مقدار اولیه 1 باشد
+      counter: cartItem ? cartItem.counter : 1 
     };
   
     const modalElement = document.getElementById('productDetailsModal');
@@ -75,6 +112,8 @@ export class ProductsComponent implements OnInit {
         this.cartService.addToCart(cartItem);
     }
   }
+
+ 
 }
  
   

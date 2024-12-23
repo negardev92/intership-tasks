@@ -30,7 +30,7 @@ export class ProductsDetailsComponent implements OnInit {
   ngOnInit() {
     if (this.productDetails) {
       const cartItem = this.cartService.getCartItemById(this.productDetails.id);
-      this.quantity = cartItem ? cartItem.counter : 0; // تعداد از سبد خرید
+      this.quantity = cartItem ? cartItem.counter : 0; // تعداد   
     }
   
     this.cartService.cartItems$.subscribe((items) => {

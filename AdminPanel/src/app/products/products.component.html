@@ -1,5 +1,22 @@
 
 <router-outlet></router-outlet>
+<div class="input-group mt-3">
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    #searchInput
+    class="rounded-start"
+    placeholder="جستجوی محصولات"
+  />
+  <button
+    class="btn btn-outline-secondary"
+    type="button"
+    (click)="filterProducts(searchInput.value)"
+  >
+    جستجو
+  </button>
+</div>
+
 <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -34,7 +51,7 @@
 
 <div class="container-fluid mt-5">
   <div class="row" style="gap:10x;">
-    <div *ngFor="let product of products" class="col-2">
+    <div *ngFor="let product of filteredProducts" class="col-2">
       <div class="card shadow-sm" style="height: 300px; border: none;">
         <img
           [src]="product.imageUrl"

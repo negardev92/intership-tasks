@@ -1,13 +1,13 @@
 <div class="container mt-4">
-    <!-- دکمه باز کردن سایدبار -->
+    
     <button class="btn btn-primary" (click)="toggleSidebar()" >سبد خرید</button>
   
-    <!-- سایدبار -->
+    
     <div 
       class="sidebar p-3" 
       [ngClass]="{ 'active': isSidebarOpen }" 
       (click)="preventClose($event)">
-      <!-- دکمه بسته شدن -->
+      
       <button class="close-btn btn btn-outline-dark" (click)="toggleSidebar()">&times;</button>
       <h5 class="mb-3 text-center">سبد خرید</h5>
       <div *ngIf="cartItems.length === 0" class="text-center mt-5">
