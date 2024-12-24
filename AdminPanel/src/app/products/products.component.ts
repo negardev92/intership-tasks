@@ -83,17 +83,22 @@ export class ProductsComponent implements OnInit {
   }
 
   openModal(product: Product) {
-    
     const cartItem = this.cartService.getCartItemById(product.id);
     this.selectedProduct = {
       ...product,
-      counter: cartItem ? cartItem.counter : 1 
+      counter: cartItem ? cartItem.counter : 1,
     };
   
     const modalElement = document.getElementById('productDetailsModal');
     if (modalElement) {
-      const bootstrapModal = new bootstrap.Modal(modalElement);
-      bootstrapModal.show();
+      modalElement.classList.remove('hidden');
+    }
+  }
+  
+  closeModal() {
+    const modalElement = document.getElementById('productDetailsModal');
+    if (modalElement) {
+      modalElement.classList.add('hidden');
     }
   }
  

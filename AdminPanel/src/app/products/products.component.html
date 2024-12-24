@@ -1,16 +1,14 @@
 
-
-
-<div class="input-group mt-3">
+<div class="flex items-center mt-3">
   <input
     type="text"
     [(ngModel)]="searchTerm"
     #searchInput
-    class="rounded-start"
+    class="rounded-l-lg border border-gray-100 p-2  focus:outline-none focus:ring-2 focus:ring-blue-500"
     placeholder="جستجوی محصولات"
   />
   <button
-    class="btn btn-outline-secondary"
+    class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-400 transition duration-300"
     type="button"
     (click)="filterProducts(searchInput.value)"
   >
@@ -18,29 +16,62 @@
   </button>
 </div>
 
-<div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="productDetailsModalLabel">{{ selectedProduct?.name }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6">
-            <img *ngIf="selectedProduct" [src]="selectedProduct.imageUrl" class="img-fluid" alt="{{ selectedProduct.name }}" />
+<div
+  class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 hidden"
+  id="productDetailsModal"
+>
+  <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2">
+    <div class="flex justify-between items-center border-b p-4">
+      <h5 class="text-lg font-semibold">{{ selectedProduct?.name }}</h5>
+      <button
+        class="text-gray-500 hover:text-gray-700"
+        (click)="closeModal()"
+      >
+        ×
+      </button>
+    </div>
+    <div class="p-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <img
+            *ngIf="selectedProduct"
+            [src]="selectedProduct.imageUrl"
+            class="w-full h-48 object-cover rounded"
+            alt="{{ selectedProduct.name }}"
+          />
+        </div>
+        <div *ngIf="selectedProduct">
+          <p class="mb-2"><strong>Price:</strong> ${{ selectedProduct.price }}</p>
+          <p class="mb-2"><strong>Available Quantity:</strong> {{ selectedProduct.quantity }}</p>
+          <div class="flex items-center mb-4">
+            <button
+              class="px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+              (click)="decreaseQuantity()"
+              [disabled]="selectedProduct.counter <= 1"
+            >
+              -
+            </button>
+            <input
+              type="number"
+              class="w-16 mx-2 border rounded text-center"
+              [min]="1"
+              [max]="selectedProduct.quantity"
+              [(ngModel)]="selectedProduct.counter"
+            />
+            <button
+              class="px-3 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+              (click)="increaseQuantity()"
+              [disabled]="selectedProduct.counter >= selectedProduct.quantity"
+            >
+              +
+            </button>
           </div>
-          <div class="col-md-6" *ngIf="selectedProduct">
-            <p><strong>Price:</strong> ${{ selectedProduct.price }}</p>
-            <p><strong>Available Quantity:</strong> {{ selectedProduct.quantity }}</p>
-            <div class="d-flex align-items-center">
-              <button class="btn btn-secondary" (click)="decreaseQuantity()" [disabled]="selectedProduct.counter <= 1">-</button>
-              <input type="number" class="form-control mx-2" style="width: 60px;" [min]="1" [max]="selectedProduct.quantity"
-                [(ngModel)]="selectedProduct.counter" />
-              <button class="btn btn-secondary" (click)="increaseQuantity()" [disabled]="selectedProduct.counter >= selectedProduct.quantity">+</button>
-            </div>
-            <button class="btn btn-primary mt-3" (click)="addToCart()">Add to Cart</button>
-          </div>
+          <button
+            class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
+            (click)="addToCart()"
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
@@ -50,21 +81,27 @@
 
 
 
-<div class="container-fluid mt-5">
-  <div class="row" style="gap:10x;">
-    <div *ngFor="let product of filteredProducts" class="col-2">
-      <div class="card shadow-sm" style="height: 300px; border: none;">
-        <img
-          [src]="product.imageUrl"
-          class="card-img-top"
-          alt="{{ product.name }}"
-          style="height: 150px; width: 100%; object-fit: cover;"
-        />
-        <div class="card-body p-2" style="height: 120px;">
-          <h5 class="card-title" style="font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ product.name }}</h5>
-          <p class="card-text text-muted" style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Price: ${{ product.price }}</p>
-          <button class="btn btn-primary btn-block btn-sm" (click)="openModal(product)" style="font-size: 12px; padding: 5px;">جزئیات </button>
-        </div>
+
+<div class="container mx-auto mt-5">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div
+      *ngFor="let product of filteredProducts"
+      class="bg-white shadow-lg rounded-lg overflow-hidden"
+    >
+      <img
+        [src]="product.imageUrl"
+        alt="{{ product.name }}"
+        class="w-full h-36 object-cover"
+      />
+      <div class="p-4">
+        <h5 class="text-sm font-semibold truncate">{{ product.name }}</h5>
+        <p class="text-xs text-gray-500 truncate">Price: ${{ product.price }}</p>
+        <button
+          class="mt-2 w-full bg-blue-500 text-white text-xs py-2 px-4 rounded hover:bg-blue-600 transition"
+          (click)="openModal(product)"
+        >
+          جزئیات
+        </button>
       </div>
     </div>
   </div>
