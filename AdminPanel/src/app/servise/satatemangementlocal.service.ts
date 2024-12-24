@@ -12,12 +12,12 @@ export class UserService {
   constructor() {}
 
   getLocalUsers(): any[] {
-    return JSON.parse(localStorage.getItem('users') || '[]');
+    return JSON.parse(localStorage.getItem('apiuser') || '[]');
   }
 
   
-updateUsers(users: any[]) {
-  localStorage.setItem('apiusers', JSON.stringify(users)); 
-  this.usersSource.next(users);
+updateUsers(data: any[]) {
+  localStorage.setItem('apiusers', JSON.stringify(data)); 
+  this.usersSource.next(data);
 }
 }

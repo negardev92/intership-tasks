@@ -16,9 +16,9 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    // ابتدا بررسی کنید که نام کاربری و رمز عبور درست است یا خیر
+  
     if (this.authService.login(this.username, this.password)) {
-      // بررسی نقش کاربر
+      // بررسی نقش
       const user = this.authService.getUser();
       if (user) {
         this.isAdmin = user.role === 'admin'; 

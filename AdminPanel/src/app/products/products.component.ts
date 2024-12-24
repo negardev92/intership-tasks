@@ -24,19 +24,17 @@ export class ProductsComponent implements OnInit {
   selectedProduct: Product | null = null;
   filteredProducts: Product[] = [];
   searchTerm: string = ''; // متغیر جستجو
-  isLoggedIn: boolean = false;
+ 
   constructor(
     private GetApiprodcut: GetApiProdcutsService,
     private cartService: CartService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    
   ) {}
 
   ngOnInit() {
-    this.authService.isLoggedIn().subscribe(loggedIn => {
-      this.isLoggedIn = loggedIn;  
-    });
+    
   
 
      this.GetApiPro();

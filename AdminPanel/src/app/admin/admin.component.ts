@@ -21,43 +21,45 @@ export class AdminComponent implements OnInit {
 
     this.apiService.getDataFromUsers().subscribe(data => {
       this.ApiUsers = data;
-      // this.userService.updateUsers(data);
+      
     });
 
     this.userService.users$.subscribe(users => {
-      this.ApiUsers = users;
-      this.filteredUsers = [...this.ApiUsers];
+       this.ApiUsers = users;
+      
     });
 
     this.route.queryParams.subscribe(params => {
       this.searchTerm = params['search'] || null;
       if (this.searchTerm) {
-        this.filterUsers(this.searchTerm, false);
+        // this.filterUsers(this.searchTerm, false);
       }
+      // this.filterUsers(this.searchTerm, false);
     });
   }
 
-  filterUsers(searchTerm: string, updateQuery: boolean = true): void {
-    if (!searchTerm) {
-      this.filteredUsers = [...this.ApiUsers];
-      if (updateQuery) {
-        this.router.navigate([], { queryParams: { search: null }, queryParamsHandling: 'merge' });
-      }
-      return;
-    }
+  // filterUsers(searchTerm: string, updateQuery: boolean = true): void {
+  //   debugger
+  //   if (!searchTerm) {
+  //     this.filteredUsers = [...this.ApiUsers];
+  //     if (updateQuery) {
+  //       this.router.navigate([], { queryParams: { search: null }, queryParamsHandling: 'merge' });
+  //     }
+  //     return;
+  //   }
 
-    this.filteredUsers = this.ApiUsers.filter(user =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+  //   this.filteredUsers = this.ApiUsers.filter(user =>
+  //     user.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
 
-    if (updateQuery) {
-      this.router.navigate([], { queryParams: { search: searchTerm }, queryParamsHandling: 'merge' });
-    }
+  //   if (updateQuery) {
+  //     this.router.navigate([], { queryParams: { search: searchTerm }, queryParamsHandling: 'merge' });
+  //   }
 
-    if (this.filteredUsers.length === 0) {
-      alert("کاربر وجود ندارد");
-    }
-  }
+  //   if (this.filteredUsers.length === 0) {
+  //     alert("کاربر وجود ندارد");
+  //   }
+  // }
 }
 
   
