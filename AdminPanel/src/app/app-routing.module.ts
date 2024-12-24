@@ -12,9 +12,10 @@ import { ProductsDetailsComponent } from './products-details/products-details.co
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [ adminGuard],children:[{ path: 'user/:id', component:UserComponent},{ path: 'edite/:id', component: EditUserComponent },] },
+  { path: 'admin', component: AdminComponent, canActivate: [ adminGuard], data: { role: 'admin' }, children:[{ path: 'user/:id', component:UserComponent},{ path: 'edite/:id', component: EditUserComponent },] },
   
-  { path: 'products', component:  ProductsComponent ,children:[
+  { path: 'products', component:  ProductsComponent ,canActivate: [adminGuard],
+    data: { role: 'user' },children:[
      { path: 'shopingcart', component: ShopingCartComponent },
   
     { path: 'ProductsDetails/:id', component: ProductsDetailsComponent },

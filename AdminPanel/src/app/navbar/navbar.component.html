@@ -1,22 +1,22 @@
-<nav class="bg-gray-800 p-4">
+<nav *ngIf="isLoggedIn; else logouts" class="bg-gray-800 p-4">
   <div class="container mx-auto flex items-center justify-between">
-    <!-- حالت ورود -->
-    <div *ngIf="isLoggedIn; else logouts" class="flex items-center justify-between w-full">
+    <div class="flex items-center justify-between w-full">
       <div class="flex items-center">
-        <app-shoping-cart *ngIf="isLoggedIn"></app-shoping-cart>
+        <!-- سبد خرید فقط برای کاربران عادی -->
+        <app-shoping-cart *ngIf="!isAdmin" routerLink="shopingcart"></app-shoping-cart>
       </div>
       <div class="flex items-center space-x-4">
         <span class="text-white">{{ username }}</span>
-        <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" (click)="btnlogout()">x</button>
+        <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" (click)="btnlogout()">خروج</button>
       </div>
     </div>
-
-    <!-- حالت عدم ورود -->
-    <ng-template #logouts>
-      <div class="flex items-center space-x-4">
-        <a routerLink="/login" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Login</a>
-        <a routerLink="/register" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Register</a>
-      </div>
-    </ng-template>
   </div>
-</nav>
+</nav> 
+
+<!-- حالت عدم ورود -->
+<ng-template #logouts>
+  <div class="flex items-center space-x-4">
+    <a routerLink="/login" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Login</a>
+    <a routerLink="/register" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Register</a>
+  </div>
+</ng-template>
