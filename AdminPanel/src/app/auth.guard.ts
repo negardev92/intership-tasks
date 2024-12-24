@@ -20,7 +20,7 @@ export class adminGuard implements CanActivate {
 
     if (route.data.role === 'admin' && user.role !== 'admin') {
       // اگر کاربر عادی بود و مسیر مربوط به ادمین بود
-      this.router.navigate(['/products']); // هدایت به صفحه سبد خرید
+      this.router.navigate(['products/shopingcart']); // هدایت به صفحه سبد خرید
       return false;
     }
 

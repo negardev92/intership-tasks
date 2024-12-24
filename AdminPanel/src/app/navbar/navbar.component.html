@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between w-full">
       <div class="flex items-center">
         <!-- سبد خرید فقط برای کاربران عادی -->
-        <app-shoping-cart *ngIf="!isAdmin" routerLink="shopingcart"></app-shoping-cart>
+        <app-shoping-cart *ngIf="!isAdmin" routerLink="products/shopingcart"></app-shoping-cart>
       </div>
       <div class="flex items-center space-x-4">
         <span class="text-white">{{ username }}</span>
