@@ -40,11 +40,19 @@ export class ProductsDetailsComponent implements OnInit {
   }
 
   increaseQuantity() {
-    this.cartService.increaseQuantity(this.productDetails.id);
+    if (this.productDetails && this.productDetails.counter < this.productDetails.quantity) {
+      this.productDetails.counter++;
+      this.cartService.increaseQuantity(this.productDetails.id); 
+    }
+    
   }
 
   decreaseQuantity() {
-    this.cartService.decreaseQuantity(this.productDetails.id);
+    if (this.productDetails && this.productDetails.counter > 1) {
+      this.productDetails.counter--;
+      this.cartService.decreaseQuantity(this.productDetails.id); 
+    }
+    
   }
 
   addToCart() {
