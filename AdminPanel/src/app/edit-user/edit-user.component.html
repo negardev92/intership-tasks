@@ -1,28 +1,58 @@
-.<div class= "container-fluid" >
-<div class="text-center " >
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" style="width: 100%; max-width: 600px;">
-      <div class="col-12 d-flex justify-content-center align-items-center  " style="height: 80vh">
-        <div class="card text-center bg-light mb-3 m-3" style="max-width: 80%">
-          <div class="card-body">
-            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp" class="rounded-3" style="width: 150px" alt="Avatar" />
-            <hr>
-            <div class="mb-3">
-              <label for="username" class="form-label">Username</label>
-              <input type="text" id="username" formControlName="username" class="form-control" />
+<div class="container mx-auto">
+  <div class="flex justify-center">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="w-full max-w-md">
+      <div class="flex justify-center items-center h-screen">
+        <div class="card bg-gray-100 shadow-md rounded-lg p-6">
+          <div class="card-body text-center">
+            <img 
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/5.webp" 
+              class="rounded-full mx-auto mb-4" 
+              style="width: 150px" 
+              alt="Avatar" 
+            />
+            <hr class="my-4">
+            <div class="mb-4">
+              <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+              <input 
+                type="text" 
+                id="username" 
+                formControlName="username" 
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
             </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" id="password" formControlName="password" class="form-control" />
+            <div class="mb-4">
+              <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                formControlName="password" 
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
             </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label">Phone</label>
-              <input type="text" id="phone" formControlName="phone" class="form-control" />
+            <div class="mb-4">
+              <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+              <input 
+                type="text" 
+                id="phone" 
+                formControlName="phone" 
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
             </div>
-            <div class="mb-3">
-                <label for="Email" class="form-label">Email</label>
-                <input type="text" id="Email" formControlName="email" class="form-control" />
-              </div>
-            <button type="submit" class="btn btn-light mx-2">Save</button>
+            <div class="mb-4">
+              <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+              <input 
+                type="text" 
+                id="email" 
+                formControlName="email" 
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
+            </div>
+            <button 
+              type="submit" 
+              class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>
