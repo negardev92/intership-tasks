@@ -3,7 +3,7 @@ import { GetApiProdcutsService } from '../servise/get-api-prodcuts.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../servise/shared.service';
 import { AuthService } from '../../app/servise/auth.service'
-import * as bootstrap from 'bootstrap';
+
 
 export interface Product {
   id: number;
@@ -24,7 +24,8 @@ export class ProductsComponent implements OnInit {
   selectedProduct: Product | null = null;
   filteredProducts: Product[] = [];
   searchTerm: string = ''; // متغیر جستجو
- 
+  columnCount: number = 4;
+
   constructor(
     private GetApiprodcut: GetApiProdcutsService,
     private cartService: CartService,
@@ -34,9 +35,6 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
-  
-
      this.GetApiPro();
 
      this.route.queryParams.subscribe(params => {
@@ -122,6 +120,7 @@ export class ProductsComponent implements OnInit {
         this.cartService.addToCart(cartItem);
     }
   }
+  
 
  
 }
